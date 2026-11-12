@@ -1,0 +1,105 @@
+Microsoft 
+Account manager for Mr. Gullable
+Mr. Gullable
+
+Reports are now assessed as Complete or Not Complete. For bounty-eligible reports, completeness is considered when determining award amounts. Review the updated requirements, supporting artifact guidance, and examples before submitting. Learn more: aka.ms/complete-report-blog
+Silent intrusion
+Silent intrusion
+VULN-210878
+
+
+This case is closed as a non-MSRC case. See the activity feed for details. Please reply on this case only if you have new information to share.
+
+Description
+Reproduction steps
+REPRODUCIBLE STEPS:
+*redacted*)
+
+__
+System / Memory Layout Diagram__:
+
+┌─────────────────┐          ┌───────────────────┐          ┌──────────────────┐
+
+│  Client Device  │          │   Local Storage   │          │  Backend Server  │
+
+└────────┬────────┘          └─────────┬─────────┘          └────────┬─────────┘
+
+        │                             │                             │
+
+        │  1. User Logs In            │                             │
+
+        ├─────────────────────────────┼────────────────────────────►│
+
+        │                             │                             │
+
+        │  2. Return Session Token    │                             │
+
+        │◄────────────────────────────┼─────────────────────────────┤
+
+        │                             │                             │
+
+        │  3. Store Token Insecurely  │                             │
+
+        ├────────────────────────────►│                             │
+
+        │                             │                             │
+
+        │  4. App Exits (No Logout)   │                             │
+
+        ├─────────────────────────────┘                             │
+
+        │                                                           │
+
+        │  [VULNERABILITY]                                          │
+
+        │  Token remains active indefinitely on server.             │
+
+        │                                                           │
+
+        │  5. Retrieve Persistent Token                             │
+
+        │◄────────────────────────────┐                             │
+
+        │                             │                             │
+
+        │  6. Use Token to Replay Request                           │
+
+        ├─────────────────────────────┼────────────────────────────►│ (Access
+
+Description
+NOTE: SAYS WAS FIXED THATS INCORRECT PLEASE SECURE MY ACCOUNTS MY REPORTS ARE BEING TAKEN SOME IF FROM WMPLOYEES BUT NOT THE MFA BIPASS. ATTACKERS HAVE ACCESS TO THE PLATFORM AND POSSIBLY THE STORAGE BANK FOR EXPLOITS (URGENT)
+
+
+Medium
+
+CVSS v3.1: 9.5 IMPORTANT NEEDS IMMEDIATE ATTENTION 
+Hacking Skill Needed:
+
+[ medium ]
+
+User Interaction Needed:
+
+[ Yes ]
+
+Active exploit:Yes, have reported before and has not been corrected!!
+
+Threat Concern:
+
+Insecure session persistence undermines the security of multi-factor authentication (MFA). If an active session token can be retrieved locally and reused indefinitely, it allows an unauthorized party to bypass authentication controls and perform actions on behalf of the victim.
+
+Expected Results:
+
+Under secure conditions, when a user exits the application or browser session without logging out, the session token should be invalidated on the server side or securely stored in encrypted, isolated storage that is inaccessible to other processes. Multi-factor authentication (MFA) parameters must also be strictly validated server-side for each session creation request.
+
+Actual Results:
+
+If session tokens are kept persistent indefinitely on the server side and stored in unencrypted local data paths (such as standard browser sqlite history files or unprotected application cache), a local attacker or malware with read access to the device file system can extract the token. This allows complete session hijacking, bypassing MFA requirements, and gaining unauthorized access to the user's account.
+
+Possible Fixes:
+
+Implement strict server-side session timeouts and absolute token lifespans.
+Ensure that closing the client application sends a voluntary logout request to invalidate the token on the server.
+Secure local storage by utilizing platform-specific secure storage APIs (such as Android Keystore or iOS Keychain) instead of raw SQLite tables.
+Injection Vector / Chain of Custody (How it got put there):
+
+The persistent session token is stored insecurely in local database structures (such as SQLite caches or browser session state files) on the host device due to a lack of file-level encryption or secure sandbox storage configurations.
