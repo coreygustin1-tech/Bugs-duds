@@ -1,0 +1,86 @@
+User-agent: *
+Disallow: /*?secret=
+Disallow: /*?secret=
+Disallow: /*?admin=
+Disallow: /*?config=
+Disallow: /*?backup=
+User-agent: *
+Disallow: /*.config$
+Disallow: /*.sql$
+Disallow: /*.log$
+Disallow: /*.bak$
+Disallow: /*.json$
+User-agent: *
+Disallow: /admin/
+Disallow: /config/
+Disallow: /includes/
+Disallow: /backup/
+Disallow: /private
+--------------------------------------------------
+
+Hello,
+Thanks for the time and consideration of my report, please fully and accurately view all included below. Thank you.
+
+__**Date**__: 8/15/2026
+
+__**Title**__: Insecure SMC Parameter Validation and Double-Fetch TOCTOU in TrustZone Gateway Interface
+
+__**Target/Site Tested**__: Samsung Rich OS TrustZone (Teegris) SMC Driver Interface
+
+__**Severity Level & Scoring**__: High - 8.1 (CVSS v3.1)
+
+__**Hacking Skill Needed**__: [ experienced ]
+
+__**User Interaction Needed**__: [ No ]
+
+__**Threat Concern**__: A vulnerability of this nature completely undermines the hardware-enforced isolation boundary of Samsung Rich OS. If compromised, an attacker can extract critical device keys, bypass bootloader security controls, or gain persistent control over the trusted application environment, rendering hardware-backed security features ineffective.
+
+__**Expected Results**__: Under secure conditions, the Secure Monitor Call (SMC) handler must fully sanitize all input pointers received from the Normal World (Rich Execution Environment - REE) and perform single-fetch operations into dedicated, secure-world-only memory before validation. This prevents modification of parameters post-validation by concurrent threads in the REE.
+
+__**Actual Results**__: The Secure World kernel fails to copy parameter structures into secure TEE memory before validating them. Instead, it accesses the parameters multiple times directly from the shared memory buffer (Double-Fetch). By exploiting this race condition (TOCTOU), a malicious REE component can modify pointer values or size metadata immediately after the validation step but prior to execution. This allows an attacker to bypass bounds checks, leading to arbitrary memory writes in secure memory (SRAM/TzRAM) and execution flow hijacking within the TEE.
+
+__**Possible Fixes**__: 1. Implement a single-fetch policy: Immediately copy the entire parameter structure from shared memory into private, secure enclave memory (Tee-private memory) before performing any validation.
+2. Ensure all validation logic operates exclusively on the secure local copy, never referencing the original shared memory address.
+3. Restrict SMC invocation access permissions using strict SELinux policies and kernel driver access controls.
+
+__**Injection Vector / Chain of Custody (How it got put there)**__: The vulnerability is built natively into the kernel-level/TEE interface handler code. The developers failed to enforce private copies of pointer data (deep copy) prior to validation, exposing a direct memory-mapped interface (shared between REE and TEE worlds) to concurrency attacks.
+
+
+ __**REPRODUCIBLE STEPS**__:
+redacted
+
+
+poc:
+redacted
+
+
+__**System / Memory Layout Diagram**__:
+Normal World (REE)             Secure World (TEE)
+┌──────────────────┐           ┌───────────────────┐
+│  Attacker App/   │           │   Secure OS       │
+│  Kernel Driver   │           │   (e.g. Teegris)  │
+└────────┬─────────┘           └─────────┬─────────┘
+         │                               │
+         │  1. Map Shared Memory         │
+         ├──────────────────────────────►│
+         │                               │
+         │  2. Trigger SMC call          │
+         ├──────────────────────────────►│
+         │                               │  [TOCTOU Window]
+         │                               │  3. Validate ptr
+         │  4. Race: Modify Shared Mem   │  (Read 1 - Passed)
+         ├───────────────────────────────┼────────┐
+         │                               │        ▼
+         │                               │  5. Fetch Data (Read 2)
+         │                               │  (Uses altered pointer!)
+         │                               │◄───────┘
+         │                               │
+         ▼                               ▼
+
+I promise to always test with the up most respect and rule abiding intentions.
+ All processes, steps, information here in, is true. All reports will be complete as is
+ allowable within the rules of engagement & terms of testing for the target.
+
+Best regards,
+
+C.G.
