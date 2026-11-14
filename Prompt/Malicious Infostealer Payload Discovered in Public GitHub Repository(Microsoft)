@@ -1,0 +1,43 @@
+Disallow: /*.bak$
+Disallow: /*.json$
+User-agent: *
+Disallow: /admin/
+Disallow: /config/
+Disallow: /includes/
+Disallow: /backup/
+Disallow: /private
+--------------------------------------------------
+
+Hello,
+Thanks for the time and consideration of my report, please fully and accurately view all included below. Thank you.
+
+__**Date**__: 9/21/2026
+
+__**Title**__: Malicious Infostealer Payload Discovered in Public GitHub Repository
+
+__**Target/Site Tested**__: https://github.com/passsa1337/Vare-Stealer
+
+__**Severity Level & Scoring**__: Critical - 9.8 (CVSS v3.1)
+
+__**Hacking Skill Needed**__: [ easy ]
+
+__**User Interaction Needed**__: [ Yes ]
+
+__**Threat Concern**__: This repository hosts active malware that threatens the integrity and security of the Microsoft/GitHub ecosystem and its users. It necessitates immediate remediation to prevent widespread credential theft and unauthorized system access.
+
+__**Expected Results**__: The repository should contain legitimate, safe, and non-malicious code. Public GitHub repositories hosting code must not contain malware, infostealers, or obfuscated payloads designed to compromise user environments or exfiltrate sensitive local data.
+
+__**Actual Results**__: Execution of this repository triggers an infostealer payload designed to harvest Discord tokens, browser cookies, saved credentials, and system information, leading to full account takeover and data exfiltration from the user's machine.
+
+__**Possible Fixes**__: Immediately suspend the repository and its associated user account. Implement static analysis scanning for repositories containing known infostealer dependency profiles (e.g., combination of sqlite3, screenshot-desktop, and obfuscation libraries).
+
+__**Injection Vector / Chain of Custody (How it got put there)**__: The repository was created directly by a user account; the malicious content was introduced via direct commit of obfuscated scripts and a package.json configured to trigger automated exfiltration upon execution
+__**System / Memory Layout Diagram**__:
+┌───────────────┐    ┌─────────────────┐    ┌─────────────────────┐
+│ User Executor │──► │ Malicious Repo  │──► │ Exfiltration Server │
+└───────────────┘    └──────┬──────────┘    └──────────┬──────────┘
+                            │                          │
+                    ┌───────┴──────┐           ┌───────┴──────┐
+                    │ JS Execution │           │ Data Stolen  │
+                    │ (vareobf.js) │           │ (Cookies/DB) │
+                    └──────────────┘           └──────────────
