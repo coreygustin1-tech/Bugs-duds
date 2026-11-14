@@ -1,0 +1,296 @@
+Bad bug program experience with hackerone after licide react exploit found...*PUBLIC ADVISEMENT OF MALICIOUS SITE HOSTING VIA HACKERONE *IF DISALLOWED PLEASE REMOVE,** MALICIOUS LINKS REDACTED*
+Title: Requested report bug #1
+Scope: *.wix.com
+Weakness: None
+Severity: No Rating
+Link: https://hackerone.com/reports/3628693
+Date: 2026-03-26 07:47:51 +0000
+By: @hackenem1
+CVE IDs:
+Details:
+Report #1
+
+hackenem1
+Add your collaborators if you collaborated on the report. Learn more about collaboration here.
+#3623968
+
+Hacker hacked
+
+Report
+Add Hacker summary
+Timeline export
+hackenem1 submitted a report to HackerOne.
+a day ago
+[https://hackerone.com/wix?type=team](https://hackerone.com/wix?type=team)
+Vulnerability Report: Malicious malicious Content Injection, xss,css, Campaign on Wix Program Page
+Summary:
+I have identified a critical security breach on the official Wix Bug Bounty program page. An unauthorized actor has modified the program guidelines and "How to Use" sections to include malicious links. These links redirect users to a phishing domain (blueboostpress.shop) that mimics a Google Drive "Subscription Expired" warning with a 30-minute countdown timer and requests credit card information/credentials.
+Steps To Reproduce:
+Navigate to the official Wix HackerOne page: [https://hackerone.com/wix](https://hackerone.com/wix)
+Scroll down to the "Premium Plan" and "SSRF Testing" sections of the program guidelines.
+Identify the suspicious instructions in Step 4: "Use this website to generate a CC number and use it for payment."
+Click the hyperlinked text (e.g., "this website" or "Wix SSRF Checker").
+Observe the redirect to [https:  REMOVED MALICIOUS LINK).
+Confirm the presence of a high-pressure phishing popup claiming "Drive Subscription Expired" with a red countdown timer (Seen in attached screenshots).
+Impact
+Technical Analysis:
+This appears to be a Stored Content Injection or Broken Link Hijacking attack.
+Malicious Instruction: The page explicitly tells researchers to use a "CC generator," which is a common tactic to lead users to malware or credential-harvesting sites.
+Phishing Payload: The destination *REDACTED MALICIOUS LINK* uses
+
+social engineering (urgency/fear) to trick researchers into entering sensitive data.
+Platform Integrity: Because this is hosted on a trusted [hackerone.com](http://hackerone.com) URL, users are highly likely to trust these links, leading to a massive risk of account takeover for the researcher community.
+Impact:
+High Risk of Account Takeover (ATO): Researchers clicking these links may have their Google or HackerOne credentials stolen.
+Financial Fraud: The instructions to use a "CC generator" likely lead to a skimming site.
+Reputational Damage: Legitimate organizations (Wix and HackerOne) are currently serving as a "jump point" for a live phishing campaign.
+Supporting Evidence:
+Screenshot 1: Showing the "30:00" countdown timer and fake Google Drive alert.
+Screenshot 2: Showing the hijacked Wix instructions on HackerOne telling users to use a CC generator.
+Screenshot 3: Showing the [hackerone.com/wix](http://hackerone.com/wix) URL in the browser bar while the malicious content is displayed.
+Answers for question on next page to accept.
+"The link can be controlled by the attacker." Your Answer: Yes. The attacker has not only controlled the destination of the link but has modified the surrounding text in the program guidelines. The instructions to "Use this website to generate a CC number" (seen in my screenshots) are clearly malicious injections that do not belong to Wix or HackerOne. This is Stored Content Injection, not just a dead link.
+"The link is owned by the company..." Your Answer: The links are being represented as official Wix tools (e.g., "Wix SSRF Checker" or "Wix iOS Application"). Because these are hosted on the official [hackerone.com/wix](http://hackerone.com/wix) team page, they carry the authority of the company
+company. The fact that they lead to **REDACTED MALICIOUS LINK) (a phishing domain) proves that the "Source of Truth" on the Wix program page has been compromised.
+"The link is on one of the main pages..." Your Answer: Yes. This is on the Main Program Directory page ([hackerone.com/wix](http://hackerone.com/wix)), which is the primary landing page for every researcher looking to work with Wix. This is not a hidden blog post; it is the core "Policy and Guidelines" page.ATTENTION: This is NOT a standard broken link hijacking. The official Wix program description has been maliciously edited to include phishing instructions and links to a scam site (blueboostpress.shop). This is a Stored Content Injection attacking researchers directly on the HackerOne platform. Please see the attached screenshots of the fake 'CC Generator' instructions and the 30-minute phishing timer."
+9 attachments
+F5594305: Screenshot\_20260323-175211\_Google\_Play\_Store.png
+F5594306: Screenshot\_20260323-190629\_Chrome.png
+F5594307: Screenshot\_20260323-173702\_Chrome.png
+F5594308: Screenshot\_20260323-173306\_Chrome.png
+F5594309: Screenshot\_20260323-190147\_Chrome.png
+F5594310: Screenshot\_20260323-190021\_Chrome.png
+F5594311: Screenshot\_20260323-190116\_Chrome.png
+F5594312: Screenshot\_20260323-190119\_Chrome.png
+F5594313: Screenshot\_20260323-190124\_Chrome.png
+Bot:
+posted a comment.
+a day ago
+Hello @hackenem1,
+Thank you for your submission!
+Your report has passed the preliminary review. Please note that this does not confirm validation, the status may change after further review.
+Next in the workflow 
+
+
+
+our report has passed the preliminary review. Please note that this does not confirm validation, the status may change after further review.
+Next in the workflow is for our team to validate and reproduce the issue, evaluating its accuracy and security impact. You will be notified when the team has reviewed and made an assessment on your report.
+We'll keep you updated as the process moves forward. Have a great day!
+Timeline:
+2026-03-26 07:53:12 +0000: @h1_analyst_minnie (bug not applicable)
+Hi @hackenem1,
+
+
+Thanks for bringing this to our attention. While text or content injection is a recognized issue, it is generally considered low severity and does not typically meet the threshold for a security concern, as its impact often relies heavily on social engineering.
+
+For these reasons, `Content Spoofing or Text Injection` is listed as one of the core ineligible findings and are therefore not eligible for submission to bug bounty or vulnerability disclosure programs.
+
+All such categories are outlined on our Core Ineligible Findings page to help set clear guidelines:
+https://docs.hackerone.com/en/articles/8494488-core-ineligible-findings
+
+In some circumstances, these types of issues may be considered valid if they demonstrate a clear security impact. When reporting such vulnerabilities, please consider realistic attack scenarios and describe additional security impact of the behavior.
+
+Your effort is nonetheless appreciated and we wish that you'll continue to research and submit any future security issues you find.
+
+Regards,
+@h1_analyst_minnie
+---
+2026-03-26 07:53:13 +0000: @h1_analyst_minnie (changed scope)
+---
+2026-03-26 08:11:53 +0000: @hackenem1 (comment)
+Hows it gonna pass first review, then go from informative to not applicable? What does that even mean not applicable as I can make it applicable which I already have. First the thread was locked on me, so email them email said that this wasn't my profile but it is the one email is tied to so it is the correct account. Theatrical means made up this was very real and it bipassed your systems,, software and hackers for me to catch it. I've found multiple bugs in last two week and so far used for all of them, then closed, and then they fix them after. Someone hacked your site, invested malicious content, and no one knew sounds like a decent security issue in those means 
+---
+2026-03-29 07:05:02 +0000: @hackenem1 (comment)
+Also how gona say closed then change the scope of it that defeats what's being said...
+---
+2026-04-12 00:28:02 +0000: @hackenem1 (comment)
+Close a report and leave the issue there that's messed up.
+---
+2026-05-26 05:10:41 +0000: @hackenem1 (comment)
+This needs reopened and reassessed you've left a open vularibility within the platform itself.
+Skip to main content >
+Hackerone logo
+hackenem1
+Open
+Needs more information
+More 
+Search all reports
+Show filters
+Nothing to see here yet!
+Click on a report to dive into the details.
+They're ignoring dangerous content in their platform..
+I understand your concern. To help you effectively, I need more context about the situation:
+What platform are you referring to?
+What type of dangerous content is being ignored (e.g., malware, phishing, data leaks, exploits)?
+Have you already reported this to the platform owners, or are you looking for guidance on how to do so?
+Is this a vulnerability you've discovered, or are you observing a policy/moderation issue?
+If this is a security vulnerability or a responsible disclosure issue related to a HackerOne program, I can help you navigate the reporting process. If it's something else, I may be able to point you toward appropriate resources.
+It's within wix.com bug bounty program on hacker ones site and programs. I reported to both and was closed as spoofing. But is not spoofing however after reporting and then closing my report I reported to support who done the same and closed it out. But none fixed or corrected it
+This sounds frustrating—you've identified what you believe is a legitimate security issue, but it's being dismissed as spoofing across multiple channels. Let me clarify a few things to better understand your situation:
+The vulnerability itself: Can you describe what the dangerous content or issue actually is? (Without sharing sensitive details, what category does it fall into—authentication bypass, data exposure, XSS, etc.?)
+Why you believe it's not spoofing: What distinguishes this from a spoofing vulnerability in your assessment?
+Current status: Is your report still closed, or are you looking to reopen it?
+Understanding these details will help me advise you on your options. If you believe the report was incorrectly triaged, there are steps you can take—such as requesting a re-evaluation or escalating through HackerOne's channels—but the specifics depend on what we're dealing with.
+"Broken Link Hijacking in Program Policy Leads to Malicious Scareware. the exact link within wix program on hackerone the link in instructions no longer points to test credit cards, but has been bought by a malicious actor.
+Include the screenshots or details of the fake Google Drive timer and the broken App Store link.
+Companies take this very seriously because it ruins the trust of their bug bounty program. It is highly likely they will accept this report, fix the instructions, and they may even award you a bounty for catching it
+Now I understand the issue clearly, and you're absolutely right to be concerned. This is not a spoofing vulnerability—it's a broken link hijacking issue in Wix's program documentation on HackerOne, which has real security implications.
+Here's what's happening:
+A link in Wix's program instructions (likely in their testing environment or scope documentation) no longer points to its intended legitimate resource
+Instead, it's been registered by a malicious actor and now serves scareware/malicious content
+This undermines the integrity of the bug bounty program itself and could mislead security researchers
+Why this matters:
+It damages trust in the program
+Researchers following official instructions could accidentally access malicious content
+It's a legitimate platform/program integrity issue that Wix absolutely should fix
+What you should do:
+Request a report re-evaluation on your original HackerOne report. Include clear evidence:
+Screenshots showing the broken link in the program instructions
+Evidence of what the malicious actor's site contains (scareware, phishing, etc.)
+Clarification that this is a program documentation/integrity issue, not a spoofing vulnerability
+Contact HackerOne support directly with this context. Explain that the report was incorrectly categorized and highlight the program integrity concern—HackerOne's support team takes these seriously.
+Escalate to Wix's security team via their official security contact if you have it, separate from the bounty program,, to ensure they're aware of the malicious registration.
+---
+2026-05-27 23:01:39 +0000: @hackenem1 (comment)
+Disclosure 48 hours public forums for fraud and extortion of reports if not paid as should've been. I am done reporting anything to you but you owe me axios yeah I seen the reports! Fix this stoke brokers don't like liability in their shares...
+--- corey gustin
+Title: Critical Hackerone platform Xss site take over
+Scope: hackerone.com
+Weakness: Cross-site Scripting (XSS) - Stored
+Severity: High (8.9)
+Link: https://hackerone.com/reports/3734063
+Date: 2026-05-13 23:12:58 +0000
+By: @hackenem1
+CVE IDs:
+Details:
+**Summary:**
+Malicious links and instructions have been injected into the Wix bug bounty program policy on HackerOne. These injected links appear as legitimate hyperlinks within the program rules section and redirect researchers to phishing sites, including a pornographic website (Chaturbate). The malicious content includes explicit instructions telling researchers to click external links to bypass credit card validation, directly facilitating credential theft.
+**Description:**
+Within the hackerones site programming the Wix program page at https://hackerone.com/wix?type=team contains injected malicious content within the program guidelines, specifically in the "Premium Plan" and "SSRF Testing" sections. This content persists on the platform despite previous reports and has evolved to include increasingly harmful destinations.
+### Malicious Content Details:
+**Malicious Instructions in Program Rules:**
+Within the program guidelines, there are instructions that state: "Use this website to generate a CC number and use it for payment" - directing researchers to click external links as part of what appears to be official program guidance.
+**Malicious Link Destinations:**
+The injected blue hyperlinks redirect to multiple malicious sites:
+1. **blueboostpress.shop** - A phishing domain mimicking Google Drive with a "Subscription Expired" warning, countdown timer, and credit card information request
+2. **Chaturbate** - An adult pornographic/sex chat website
+3. Multiple advertising sites (Google Spaces, Apple Store, Wix ads)
+### Steps To Reproduce:
+1. Navigate to the Wix Bug Bounty program page within hackerones site: https://hackerone.com/wix?type=team
+2. Scroll down to the program guidelines section
+3. Locate the "Premium Plan" and "SSRF Testing" sections
+4. Find the malicious instruction in Step 4: "Use this website to generate a CC number and use it for payment"
+5. Click on the hyperlinked text (e.g., "this website" or "Wix SSRF Checker")
+6. Observe redirects to malicious sites including:
+   - blueboostpress.shop (phishing site with fake Google Drive expiration warning)
+   - Chaturbate (adult pornographic content)
+   - Various advertising sites
+**Evidence Provided:**
+- Screenshots showing the malicious content on the Wix program page
+- Screen recording demonstrating access to the malicious links and their destinations
+- Reference to previous report #3628693 documenting the blueboostpress.shop phishing domain
+**Related Reports:**
+This issue has been reported multiple times with ongoing correspondence (125+ emails between reporter, Wix, HackerOne, and Base 44):
+- Report #3623968
+- Report #3633234
+- Report #3628693 (showing blueboostpress.shop phishing attack)
+- Report #3623885
+**Current Status:**
+Despite extensive reporting and communication, the malicious content remains present on the platform and has evolved to include pornographic content (Chaturbate), demonstrating ongoing compromise of the HackerOne platform's content security.
+## Impact
+The attacker can place an remove new content within the wix program on hackerones platform. This says the attacker has gained access to the platform bro be able to update new content. Example previous content was a Google storage notice of storage update. This has now changed to a site called chaturbate which is a pornographic live chat site with sexual content. Through hackerones site the attacker can gain the boundaries to trick the researcher into entering the site upon entering the site maleware can be injected into the users device or system. The attacker is standing behind hackerones name for creditability and cohercion. This can ruin the name and reputation within the sites use. This is a compromised platform and the attacker has access at will to change and delete content within the wix program rules on hackerones site. (Personally I'd call it a zero day fix cause it's ruining the programs reputation being a bug program with bugs in the programs. The hacker may even be able to hid the content from the program administrator as it's been reported and looked passed. If required the 125 emails between myself, wix, and hackerone can be shared and viewed to verify the neglegent acts left unaddressed.
+Timeline:
+2026-05-14 07:09:06 +0000: @h1_analyst_aaron (bug duplicate)
+Hi @hackenem1,
+Thank you for your submission and for your continued vigilance in monitoring this security issue.
+After reviewing your report, this has been identified as a duplicate of report #3623968, which was submitted on March 23, 2026. Both reports describe the same vulnerability instance on hackerone.com/wix?type=team, involving malicious content injection in the "Premium Plan" and "SSRF Testing" sections with identical phishing instructions and destinations. While you've noted that the malicious content has evolved to include additional redirect targets like Chaturbate, this represents updates by the attacker to the same underlying injected content rather than a new distinct vulnerability.
+The original report #3623968 was previously evaluated and closed, and your report will be handled consistently with that determination. We appreciate your effort in documenting the evolving nature of this issue.
+Thanks,
+@h1_analyst_aaron
+---
+2026-05-27 22:57:13 +0000: @hackenem1 (agreed on going public)
+Making all reports public in 48 hours, or taking them to the authorities and press as well as Facebook, Instagram, x, tic tok, I will then publish my article on such as to why hackerone is not a safe platform for bug hunters as threats are left to steal their data. Choice is yours reports already been saved and moved off site so they can not be removed or sabatoged. You've used me, lied to me, tricked me, stripped me of any award. Now it's time to owe back especially after seeing I was correct and was being decived. I've already quit submitting reports to you so you've already created a outside threat with no intention. The more that know the less buis you have in the end havkerone will sink to the bottom as it already is....
+---
+2026-05-27 22:57:16 +0000: @auto-p4pzglxvx4abcwzo (cancelled disclosure request)
+Hi there,
+  Thanks for submitting your disclosure request!
+  HackerOne proudly supports public disclosure of resolved security reports to foster learning and advance the security community through shared knowledge of creative techniques.
+  Unfortunately, **this report is not currently eligible for disclosure.**
+  **Eligibility Requirements:**
+  Report status must be valid & `Resolved`
+  Reports closed as `Spam`, `Not Applicable`, `Informative`, or `Duplicate`, or valid reports that are awaiting a fix are not eligible for disclosure.
+  Best regards,
+  HackerOne
+---
+Title: Lucide react icon import version 0.475 not 0.745 need updated to 0.476 to cure invasion
+Scope: github.com
+Weakness: LLM08:2025 Vector and Embedding Weaknesses
+Severity: High (8.9)
+Link: https://hackerone.com/reports/3633234
+Date: 2026-03-28 03:54:25 +0000
+By: @hackenem1
+CVE IDs:
+Details:
+## Description:
+Malicious lucide react version 0.744
+[When requesting a graphics input for a app or project from lucide react 0.745 it pulls a malicious icon which gives actors open access to projects and works. If one can gain access to the lucide react coding library for icons they can attach a maleware to the icon. When that icon is pulled in out into the users environment it gives the actor full and total access to the users profile and work. To gain access again the actor pulls the icon and it gives that backdoor access again which crashes the page and then has be reframed.
+## Steps To Reproduce
+1.download or execute the install of lucide react 0.745 warning not responsible for harm to systems or devices by testing the issue.
+Next attach a lucide react icon to the input of the app.
+Next exit then renter the app you should see a white screen. Now if using a developer AI ask them to pull bugs and icons. You should get a notice of a missing icon and copy message
+## Impact
+Full account access and duplicate authority of all work and projects. To correct the hardware must be updated to 0.746 lucide react. Bug is reproducible yet not sure how you recreate what I've already fixed 🤔
+Timeline:
+2026-03-28 03:55:12 +0000: @hackenem1 (report title updated)
+---
+2026-03-28 04:06:17 +0000: @hackenem1 (report title updated)
+---
+2026-03-28 11:22:19 +0000: @hubot (comment)
+Hi @hackenem1,
+Thanks for the submission! We are looking into this issue and will let you know if we need any more information. Once validated, we will let you know and triage this issue to the appropriate team.
+Best regards and happy hacking!
+@que_queee
+---
+2026-04-17 04:26:07 +0000: @hubot (bug spam)
+---
+2026-04-17 06:31:35 +0000: @hackenem1 (comment)
+I can validate it for you with screenshots.
+---
+2026-04-17 06:32:43 +0000: @hackenem1 (comment)
+Spam really? Now youre just being absurd and negligent.how do I request all my data?
+---
+2026-04-18 11:33:19 +0000: @que_queee (bug reopened)
+---
+2026-04-18 11:34:31 +0000: @que_queee (bug informative)
+Hello @hacknem1,
+Thank you for you research. We understand you may have identified a concern with the `lucide-react` package. However, `lucide-react` is a third-party library maintained by the [Lucide Icons project](https://github.com/lucide-icons/lucide) and is not a GitHub-owned product or dependency. As noted in our [bug bounty program scope](https://bounty.github.com/scope), only GitHub-owned applications and services are eligible for this program.
+If you believe there is an issue with a specific version of this package, we encourage you to report it directly to the [lucide-icons maintainers]( https://github.com/lucide-icons/lucide/issues). They would be best positioned to investigate and address your findings.
+Regards,
+@que_queee
+---
+2026-04-18 12:52:12 +0000: @hackenem1 (comment)
+It's lucide react repositories malicious codes being input into them. How about the lucide react crash issue on base44 denied cause base44 isn't wix which is a lie. The issue is on GitHub with lucide react icons. So 6- 8 legit reports all closed for wrongful and illogical reasons. You have maleware in your own site you fail to correct or credit, I believe there's a issue with hackerone to and called exploitive reviews, and lieing results. You never planned on paying anyone just giving the idea to take bugs and fixes. If this is how you run things may want find diff field as won't last long. Like me I'm bout over hackerone is been a deception means to a cause, it's been a time consumer for nothing, it's been unjustly treatment each report. I think the biggest vulerabilty is people's being used so I can prob at least get get some notice, and appreciation...
+---
+2026-04-18 13:36:19 +0000: @hackenem1 (comment)
+_This comment was deleted by the author._
+---
+2026-04-18 13:40:37 +0000: @hackenem1 (agreed on going public)
+Not sure why there is even a request disclosure as there is nothing binding such..but I viewed your profile and notice you have no info so guessing another wrongful ai classified.. I mean who has one with no hacker history reviewing reports..
+---
+2026-04-24 07:07:24 +0000: @hackenem1 (comment)
+I am vitoing your disclosure due to deceptive practices of classification, exploitation of researchers research and knowledge, and failure to pay an compensate under just & proper grounds. Upon providing issues I assumed I'd be properly compensated for some or even one. Yet instead I get refered hackerone, then find adware, and malicious instructions within wix on hackerone. I then contacted support 4 times and made 2 more reports every single thing brushed off. Thanks p.s. you still have not fixed the issues raised which is neglectful .thanks
+---
+2026-05-03 21:14:09 +0000: @hackenem1 (comment)
+https://www.securityweek.com/fresh-litellm-vulnerability-exploited-shortly-after-disclosure/
+Bunch of liars
+---
+2026-05-03 21:15:47 +0000: @hackenem1 (comment)
+https://www.securityweek.com/critical-github-vulnerability-exposed-millions-of-repositories/
+---
+2026-05-22 11:21:16 +0000: @hackenem1 (comment)
+{F5968545}{F5968546}.....{F5968547}
+---
+2026-05-26 05:08:50 +0000: @hackenem1 (comment)
+So stole my report and still not a dime only a email telling on the reviewer. Your welcome for the so called collaboration
+---
+
