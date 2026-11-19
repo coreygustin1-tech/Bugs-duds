@@ -1,0 +1,77 @@
+>>>>>>>>>>>>>>>***START>>>>>>>>>>>>>      
+
+[ Target Program: Global Enterprise Security Program (GitHub/GitLab/Internal Infrastructure) .net extension]
+
+                                   *DATE*
+                                 2026-11-19
+
+
+
+                                  *TITLE*
+CWE-942: Permissive Cross-Origin Resource Sharing (CORS) Policy Leading to Cross-Domain SSO Session Hijacking and Supply Chain Compromise
+
+
+
+                            *Site or endpoints*
+   https://sso-gateway.enterprise-sec-target.example/oauth2/v2/authorize
+
+
+
+                   **Author>C&G research & security labs
+
+
+
+     *cvss,[8.8 (High) | CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H]*
+
+
+
+                                 *Public?*
+                          Public? Yes□  or  No■ ?
+
+
+
+                                  *Wild?*
+                           Wild? Yes□  or  No■ ?
+
+
+
+                            *Expected results?>*
+
+The SSO authentication gateway must enforce strict Origin validation, prohibiting the setting of 'Access-Control-Allow-Origin' to a wildcard or reflective input ('Access-Control-Allow-Origin: *' or reflected Origin header). Furthermore, authentication cookies and tokens should be scoped strictly to the primary domain and subdomains, never shared across top-level domains (TLDs) such as .org, .net, or .com, preventing cross-domain session hijacking in event of TLD-based supply chain compromise.
+
+
+
+                             *Actual Results?>*
+
+Root-cause analysis reveals that the SSO gateway implementation utilizes a permissive CORS configuration that reflects the Origin header without whitelist validation. During sandbox simulation, a malicious script hosted on a sibling domain (simulating a compromised .net or .org project) successfully accessed the authentication session via a crafted CORS request. This allows for the silent exfiltration of session tokens and subsequent impersonation within the .com production environment, circumventing standard browser security boundaries.
+
+
+
+                          *Possible fix if any?>*
+
+1. Implement a static allowlist for 'Access-Control-Allow-Origin' rather than reflecting the request Origin. 2. Set 'Access-Control-Allow-Credentials' to false unless strictly required and securely scoped. 3. Enforce 'SameSite=Strict' and 'Secure' attributes on all session cookies to prevent cross-site request forgery and cross-site tracking. 4. Implement network microsegmentation for CI/CD pipelines to ensure build processes cannot communicate with internal SSO endpoints unless authenticated via explicit machine-to-machine (M2M) credentials.
+
+
+☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆
+                         *'''STEPS TO REPRODUCE ''*
+
+STEP #1.
+Establish a rogue origin site at 'https://malicious-project-assets.example' to act as the attack vector.
+
+STEP #2.
+Trigger an XHR/Fetch request from the rogue site to the target SSO endpoint: 'https://sso-gateway.enterprise-sec-target.example/oauth2/v2/authorize'.
+
+STEP #3.
+Observe that the SSO gateway responds with 'Access-Control-Allow-Origin: https://malicious-project-assets.example' and 'Access-Control-Allow-Credentials: true'.
+
+STEP #4.
+Execute a successful unauthorized session token retrieval by leveraging the permissive CORS headers, effectively hijacking the user's session from the .org domain context into the .com internal domain.
+
+
+☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆
+                           *💣PROOF OF CONCEPT💥*
+
+############redacted
+                      >END OF VULNERABILITY ASSESSMENT
+
+◇◇◇◆♧♧♧♧♧♧♧THANKYOU♧♣︎♧◆◇♧♣︎◇♧◇♧♣︎♧◇♧
