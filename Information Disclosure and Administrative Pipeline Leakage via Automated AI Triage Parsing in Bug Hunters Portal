@@ -1,0 +1,143 @@
+poc has been removed-However thisbis why ai can help with triage but cant be at the head if the line..If anything bug programs need a outside daily auditor to keep true safety within technology. with the integration into the military..it can not be negoected.
+Closed Aug 10, 2026
+Information Disclosure and Administrative Pipeline Leakage via Automated AI Triage Parsing in Bug Hunters Portal
+Google VRP - issu.ee/538695627
+
+Disclosure Information & Comments
+Report
+Your Report
+Summary: Information Disclosure and Administrative Pipeline Leakage via Automated AI Triage Parsing in Bug Hunters Portal
+
+Program: Google VRP
+
+URL: https://bughunters.google.com
+
+Vulnerability type: Other
+
+Details
+Hello, Thanks for the time and consideration of my report, please fully and accurately view all included below. Thank you.
+
+Date: 7/24/2026
+
+Title: Information Disclosure and Administrative Pipeline Leakage via Automated AI Triage Parsing in Bug Hunters Portal
+
+Target/Site Tested: https://bughunters.google.com
+
+Severity Level & Scoring: High - 8.6 (CVSS v3.1)
+
+Hacking Skill Needed: [ medium ]
+
+User Interaction Needed: [ No
+
+REPRODUCIBLE STEPS**__:
+
+' Step 1]**__: 1. Authenticate to the Google Bug Hunters Portal at https://bughunters.google.com.
+
+[Step 2]: 2. Submit a vulnerability report containing an attachment with specially crafted metadata designed to fail validation or trigger a parser exception (e.g., a steganographic image or an invalid nested archive).
+
+[Step 3]: 3. Intercept the response or observe the administrative triage error output in the portal interface or API responses.
+
+[Step 4]: 4. Extract the leaked raw Google Cloud Storage signed URL, including the GoogleAccessId, service account details, and backend signature, which grants direct read access to internal processing buckets '
+
+' PROOF OF CONCEPT (POC)**__: ') REDACTED REDACTED
+
+
+
+
+System / Memory Layout Diagram (Google Project Zero Style): â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”‚ Attacker (Bug Hunter Portal) â”‚ â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜ â”‚ â”‚ Submit Report with Malicious Metadata â–¼ â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”‚ Automated Triage Parser / LLM â”‚ â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜ â”‚ â”‚ Fails to Parse (litellm / Anthropic Exception) â–¼ â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”‚ Backend Leaks GoogleAccessId & Signature â”‚ â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜ â”‚ â”‚ Raw GCP Signed URL Exfiltrated to Attacker â–¼ â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â” â”‚ Exposed Internal Storage â”‚ â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
+
+Attack scenario
+Threat Concern**__: The Bug Hunters platform is a high-value target hosting highly sensitive zero-day exploit payloads. Leaking backend service account credentials, Cloud Storage bucket URLs, and raw processing exception details allows unauthorized third parties to intercept confidential reports. Furthermore, the lack of strict cryptographic chain-of-custody in human-AI hybrid triage leads to unauthorized utilization and 'shadow-fixing' of reported bugs, destroying trust and introducing supply chain vulnerabilities.
+
+Note: im not trying?\n To be rude disrespectful or any such, however, I put hours and hours in thoughts and thoughts searched rope, built, programmed, found report.\n Or the last 5 months? I've never been paid a cent that's been done. A portion , a prorated , a partial amount could be awarded, acknowledgment, credation, but yet I've never been given nothing I've had.Reports changed and lied about to take the credit and work and seems highly illogical being a billion dollar tech industry. Protect your assets dont burn them....
+
+Expected Results: Under secure conditions, vulnerability submissions and their attachments should be processed in an isolated sandbox. Any administrative triage components (such as automated parsing engines, AI/LLM review pipelines, or human reviewer interfaces) must not leak internal credentials, cloud storage signatures (e.g., GoogleAccessId, service account details), or backend exceptions. Reviewers and automated systems must be subject to rigorous cryptographic logging to prevent unauthorized 'shadow fixes' or raw exploit leakage.
+
+Actual Results: The automated triage parser executes untrusted inputs using internal service accounts (scrape-bucket-accessor@firecrawl.iam.gserviceaccount.com), leaking signed Google Cloud Storage URLs, HMAC signatures, and raw LLM backend exceptions (litellm.BadRequestError / AnthropicException). This breaks the confidentiality boundary of the platform and permits unauthorized metadata ingestion, exposing active reports to interception and silent remediation without appropriate reward tracking.
+
+Possible Fixes: Implement a strict 'human-in-the-loop' verification system for all automated parsing components. Enforce absolute input sanitization on all uploaded report assets before passing them to LLM or OCR parsers. Ensure all backend exceptions are caught globally and returned as generic error IDs instead of raw stack traces or signed GCP URLs. Enforce dual-authorization controls on all administrative actions to ensure reports cannot be triaged or resolved without explicit multi-party cryptographic sign-off.
+
+Injection Vector / Chain of Custody (How it got put there): The malicious vector is introduced by embedding adversarial metadata inside images or documents uploaded during the report submission process. The automated triage pipeline ingests this file, passes it to an external parser (e.g., firecrawl/litellm), and fails to sanitize the resulting API errors, rendering them directly to the client.
+
+Report Analysis
+Note: The feedback below was generated as part of an automated analysis of the submitted report. It is NOT part of the report that was submitted by the user.
+
+Vague Description
+
+The report description is too vague. Please provide more details.
+
+Invalid Report
+
+The report appears to match one of our common invalid report types.
+
+Writing Quality
+
+The report does not follow our guidelines for well-written reports.
+
+Planned disclosure date(-s): 2026-08-05
+
+Closed Aug 10, 2026
+Information Disclosure and Administrative Pipeline Leakage via Automated AI Triage Parsing in Bug Hunters Portal
+Google VRP - issu.ee/538695627
+
+Disclosure Information & Comments
+Report
+Collaborators
+You can decide to share a defined percentage of your reward with one or more collaborators which you can specify below (set the percentage to 0% to credit a collaborator without sharing the reward).
+
+Note that collaborators must have a Google Bughunters profile.
+
+Important: If you opt to donate your reward to charity, neither you nor any defined collaborators will receive a reward.
+
+Reporter
+You
+100%
+Charity Settings
+You can opt to donate the rewards for a report to charity when submitting your report; for rewards >$10k you can select the charity below.
+
+Disclosure Information
+Date	Type	
+Jul 29, 2026	Blog	
+
+
+
+Comments
+sp...@google.com Jul 24, 2026 | 17:45 | #2
+NOTE: This is an automatically generated email
+
+Hi! Many thanks for sharing your report.
+
+This email confirms we've received your message. We'll investigate the issue you've reported and get back to you once we have an update. In the meantime, you might want to take a look at the list of frequently asked questions about Google Bug Hunters.
+
+Also, if you have not already done so, create a profile on the Google Bughunters site if you'd like us to publicly recognize your contribution:
+
+Leaderboard – You'll be added here if we issue a reward for your report.
+Honorable Mentions – You'll be added here if you are not in the Hall of Fame, but we file a security vulnerability bug based on your report.
+Note that we only act on reports concerning vulnerabilities or technical security problems in one of our products. This is not the correct channel if you need to resolve a problem with your account, or want to report non-security bugs or suggest a new product feature.
+
+Cheers,
+Google Security Bot
+
+Follow us on Twitter!
+
+coreygustin1@gmail.com Jul 26, 2026 | 19:33 | #3
+This is AI too. Please have a human review this within a respectful time as the time running out, I'm not trying to be disrespectful rude by any means. However, you've not done the same to me and left me broke after working 6 months 8 months, however long And never had no appreciation of gimme or point. So let's work to this and pick the issue to continue your partnership or let's close, it, say, screw it and start working towards court, which I'd rather not do however, that's your choice, I'm going to not a little bit you still feel my app. Until 30 bug, you played with my mind more than anything. and think about it, it's all been the same individual. I'd ask that we play mediators if you can manage that professionally as I said, I'm not trying to be rude.I like to continue my partnership as I've done.But if that means nothing , and you have no attention to pay me quickly , leading me around, people can't live on working for free. Again, not time, be rude disrespectful.But I expect more of a business relationship , and if that can't be done ten days ended and you need to be taught how to have one of those. I mean, if you need to be that bad because Hey, you want a job instead of use me just stupid and why I why take everything from me make me work for a trainer.A I have no logic. I'm just trying to be a let around.And then six months my life's been flopped upside down for someone that does not even show a hint of appreciation. I i'm not trying to get rich.I'm not trying to rip you off.I'm not trying to be mean.I'm just trying to get one of the title to so I can live my life and fix my stuff.I need to as I did work so I should get to pay but yet it makes no sense.Do you do this everybody or is it just me?
+
+...@google.com Jul 27, 2026 | 14:49 | #4
+Status updated
+Closed
+Hi! We've reviewed your submission regarding the alleged information disclosure in the Bug Hunters Portal. We're closing this report because, as our automated analysis indicated, it is currently vague, lacks sufficient clarity, and doesn't contain the actionable information needed for us to properly investigate a potential security vulnerability.
+
+If you believe you've found a valid issue within the Google VRP scope, please revise and update this report. To proceed with an investigation, your update must concisely and clearly include:
+
+Clear reproduction steps: A step-by-step guide for us to reliably replicate the issue you've described.
+A specific attack scenario: Clearly define who the victim is, who the attacker is, and what each party needs to do to demonstrate the exploit.
+A concise security impact: Briefly explain how this flaw could be used to significantly affect other users or Google.
+Before updating, please ensure your finding meets our program requirements:
+
+In-scope: The issue must substantially affect the confidentiality or integrity of user data within bughunters.google.com.
+Practical: The attack must be realistic and not theoretical. Your proof of concept should clearly demonstrate the impact you describe.
+Reports that do not meet these minimum requirements will not be investigated.
+
+Thanks again for your report and time,
+The Google Bug Hunter Team
